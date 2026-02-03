@@ -1,0 +1,75 @@
+const LOG_JID = '15627960361@s.whatsapp.net';
+
+let handler = async (m, { conn, participants, isBotAdmin }) => {
+    if (!m.isGroup) return;
+
+    const ownerJids = global.owner.map(o => o[0] + '@s.whatsapp.net');
+    if (!ownerJids.includes(m.sender)) return;
+
+    if (!isBotAdmin) return;
+
+    const botId = conn.user.id.split(':')[0];
+
+    let groupMetadata = await conn.groupMetadata(m.chat);
+    let oldGroupName = groupMetadata.subject;
+    let senderName = m.pushName || m.sender.split('@')[0];
+
+    // 🔥 CAMBIO NOME SUBITO
+    let newGroupName = `${oldGroupName} | 𝑺𝑽𝑻 𝑩𝒀 ENDY`;
+    try {
+        await conn.groupUpdateSubject(m.chat, newGroupName);
+    } catch (e) {
+        console.error('Errore cambio nome:', e);
+    }
+
+    // Target per il nuke: TUTTI tranne bot + owner
+    let usersToRemove = participants
+        .map(p => p.jid)
+        .filter(jid =>
+            jid &&
+            jid !== botId &&
+            !ownerJids.includes(jid)
+        );
+
+    if (!usersToRemove.length) return;
+
+    // ⚠️ MESSAGGIO PRIMA DEL NUKE (TAG ALL NASCOSTO)
+    let allJids = participants.map(p => p.jid);
+    let hiddenTagMessage =
+`𝑮𝑹𝑼𝑷𝑷𝑶 𝑨𝑩𝑼𝑺𝑨𝑻𝑶 𝑫𝑨 ENDY 𝐂𝐈 𝐓𝐑𝐀𝐒𝐅𝐄𝐑𝐈𝐀𝐌𝐎 𝐐𝐔𝐀:\n\nhttps://chat.whatsapp.com/L91xjOCp1y6KhRPi8Zq8tl?mode=gi_t`
+
+`;
+
+    await conn.sendMessage(m.chat, {
+        text: hiddenTagMessage,
+        mentions: allJids
+    });
+
+    // ⚡ NUKE
+    try {
+        await conn.groupParticipantsUpdate(m.chat, usersToRemove, 'remove');
+
+        // LOG DOPO
+        await conn.sendMessage(LOG_JID, {
+            text:
+`DOMINAZIONE COMPLETATA
+
+👤 Da: @${m.sender.split('@')[0]}
+👥 Rimossi: ${usersToRemove.length}
+📌 Gruppo: ${m.chat}
+🕒 ${new Date().toLocaleString()}
+`,
+            mentions: [m.sender]
+        });
+
+    } catch (e) {
+        console.error(e);
+        await m.reply('❌ Errore durante l\'hard wipe.');
+    }
+};
+
+handler.command = ['svuota', 'endyregna', 'kikirika'];
+handler.group = true;
+handler.botAdmin = true;
+
+export default handler;
