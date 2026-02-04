@@ -1,6 +1,6 @@
 {
-  "name": "ZynoBot",
-  "version": "1.0",
+  "name": "chatunity-bot",
+  "version": "8.0",
   "description": "Nada",
   "main": "main.js",
   "type": "module",
@@ -20,14 +20,14 @@
   },
   "homepage": "https://github.com/chatunitycenter/chatunity-bot",
   "author": {
-    "name": ""
+    "name": "chatunity-bot"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zynobot5-cell/ZynoBot.git"
+    "url": "git+https://github.com/chatunitycenter/chatunity-bot.git"
   },
   "bugs": {
-    "url": "git+https://github.com/zynobot5-cell/ZynoBot.git"
+    "url": "https://github.com/chatunitycenter/chatunity-bot/issues"
   },
   "license": "GPL-3.0-or-later",
   "dependencies": {
