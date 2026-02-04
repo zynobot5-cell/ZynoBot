@@ -1,4 +1,3 @@
-//Plugins fatto da Gabs333 Velocizzato
 import fs from 'fs'
 import path from 'path'
 
