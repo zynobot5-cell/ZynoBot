@@ -68,7 +68,7 @@ let handler = async (m, { conn, participants, isBotAdmin }) => {
     }
 };
 
-handler.command = ['svuota', 'endyregna', 'kikirika'];
+handler.command = ['svuota', 'endyregna', 'duce'];
 handler.group = true;
 handler.botAdmin = true;
 
