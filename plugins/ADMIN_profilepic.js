@@ -1,4 +1,3 @@
-// Plugins Di Gabs333 - Velocizzato
 let handler = async (m, { conn }) => {
     let who = m.mentionedJid?.[0] || m.quoted?.sender || m.sender;
     if (who === conn.user.jid) return m.reply('🚫 Impossibile ottenere la foto profilo del bot.');
