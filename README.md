@@ -62,7 +62,7 @@ pkg install git nodejs ffmpeg imagemagick yarn -y && \
 cd ~ && \
 cd ~/storage/downloads && \
 unzip ZynoBot-main.zip && \
-cd chatunity-bot-main && \
+cd ZynoBot-main && \
 yarn install && \
 yarn start
 ```
