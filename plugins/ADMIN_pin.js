@@ -1,4 +1,4 @@
-// Plugins fatto da Gab333 - Velocizzato
+Velocizzato
 const pinQueue = new Map();
 
 let handler = async (m, { conn, command, usedPrefix }) => {
